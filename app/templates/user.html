@@ -14,7 +14,7 @@
                 <p><a href="{{ url_for('edit_profile') }}">Редактировать профиль</a></p>
                 {% elif not current_user.is_following(user) %}
                 <p>
-                    <form action="{{ url_for('follow', username=user.username) }}" method="post">
+                    <form action="{{ url_for('follow', username=user.username) }}" method="POST">
                         {{ form.hidden_tag() }}
                         {{ form.submit(value='Подписаться', class_='btn btn-primary') }}
                     </form>
