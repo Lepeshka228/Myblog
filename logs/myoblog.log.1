@@ -1,4 +1,4 @@
-2025-06-05 01:34:32,732 ERROR: Exception on /login [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+2025-06-05 01:59:14,654 ERROR: Exception on /login [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
 Traceback (most recent call last):
   File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
     cursor, str_statement, effective_parameters, context
@@ -52,59 +52,9 @@ WHERE user.username = ?
  LIMIT ? OFFSET ?]
 [parameters: ('Вовчик', 1, 0)]
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
-2025-06-05 01:38:36,660 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
-2025-06-05 01:58:43,066 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
-2025-06-05 01:59:02,835 ERROR: Exception on /login [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
-Traceback (most recent call last):
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
-    cursor, str_statement, effective_parameters, context
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\default.py", line 943, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such table: user
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
-    response = self.full_dispatch_request()
-  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1825, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1823, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "D:\myblog\app\routes.py", line 64, in login
-    user = User.query.filter_by(username=form.username.data).first()    # загрузка пользователя из БД. username приходит из формы и сравнивается с username из БД
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\query.py", line 2759, in first
-    return self.limit(1)._iter().first()  # type: ignore
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\query.py", line 2860, in _iter
-    execution_options={"_sa_orm_load_options": self.load_options},
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 2371, in execute
-    _add_event=_add_event,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 2257, in _execute_internal
-    conn,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\context.py", line 307, in orm_execute_statement
-    statement, params or {}, execution_options=execution_options
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
-    execution_options or NO_OPTIONS,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\sql\elements.py", line 524, in _execute_on_connection
-    self, distilled_params, execution_options
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1647, in _execute_clauseelement
-    cache_hit=cache_hit,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
-    dialect, context, statement, parameters
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
-    e, str_statement, effective_parameters, cursor, context
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 2351, in _handle_dbapi_exception
-    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
-    cursor, str_statement, effective_parameters, context
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\default.py", line 943, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: user
-[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.about_me AS user_about_me, user.last_seen AS user_last_seen 
-FROM user 
-WHERE user.username = ?
- LIMIT ? OFFSET ?]
-[parameters: ('Вовчик', 1, 0)]
-(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-06-05 02:00:41,550 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
+2025-06-05 02:03:37,199 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
+2025-06-05 02:20:26,629 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
+2025-06-05 02:25:44,727 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
+2025-06-05 02:36:10,707 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
+2025-06-05 02:43:54,756 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
