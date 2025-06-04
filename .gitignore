@@ -1,4 +1,5 @@
 .env
+instance/app.db
 app.db
 *.db
 *.sqlite
