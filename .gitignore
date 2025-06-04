@@ -1,1 +1,5 @@
 .env
+app.db
+*.db
+*.sqlite
+__pycache__/

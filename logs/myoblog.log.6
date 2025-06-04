@@ -1,4 +1,43 @@
-2025-05-26 14:52:50,167 ERROR: Exception on /login [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+2025-05-26 15:27:57,552 ERROR: Exception on /user/Александр [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+Traceback (most recent call last):
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "D:\myblog\app\routes.py", line 121, in user
+    return render_template('user.html', user=user, posts=posts.items, next_url=next_url, prev_url=prev_url, list_followers=list_followers, list_following=list_following)
+  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 147, in render_template
+    return _render(app, template, context)
+  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 130, in _render
+    rv = template.render(context)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "D:\myblog\app\templates\user.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "D:\myblog\app\templates\base.html", line 58, in top-level template code
+    {% block content %}{% endblock %}
+  File "D:\myblog\app\templates\user.html", line 12, in block 'content'
+    <p>Подписчики: {{ user.followers_count() }}, Подписки: {{ user.following_count() }}</p>
+  File "d:\myblog\myenv\lib\site-packages\jinja2\utils.py", line 92, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: 'app.models.User object' has no attribute 'followers_count'
+2025-05-26 15:33:12,013 INFO: Myblog startup [in D:\myblog\app\__init__.py:68]
+2025-05-26 15:34:34,946 INFO: Myblog startup [in D:\myblog\app\__init__.py:68]
+2025-05-26 15:39:27,822 INFO: Myblog startup [in D:\myblog\app\__init__.py:68]
+2025-05-26 15:40:51,782 INFO: Myblog startup [in D:\myblog\app\__init__.py:68]
+2025-05-26 15:44:40,494 INFO: Myblog startup [in D:\myblog\app\__init__.py:68]
+2025-05-26 15:45:44,323 INFO: Myblog startup [in D:\myblog\app\__init__.py:68]
+2025-05-26 15:50:58,833 INFO: Myblog startup [in D:\myblog\app\__init__.py:68]
+2025-05-27 00:56:18,875 INFO: Myblog startup [in D:\myblog\app\__init__.py:71]
+2025-05-27 00:56:35,075 ERROR: Exception on /login [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
 Traceback (most recent call last):
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
@@ -19,29 +58,41 @@ Traceback (most recent call last):
   File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
     raise rewrite_traceback_stack(source=source)
   File "D:\myblog\app\templates\login.html", line 2, in top-level template code
-    {% import "bootstrap_wtf.html" as wtf %}
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 62, in get_source
-    return self._get_source_fast(environment, template)
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 98, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: bootstrap_wtf.html
-2025-05-26 14:53:41,978 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
-2025-05-26 14:59:30,695 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
-2025-05-26 15:01:47,366 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
-2025-05-26 15:01:49,329 ERROR: Exception on /edit_profile [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+    {% import 'bootstrap/wtf.html' as wtf %}
+  File "D:\myblog\app\templates\base.html", line 65, in top-level template code
+    {% block scripts %}
+  File "D:\myblog\app\templates\base.html", line 66, in block 'scripts'
+    {{ super() }}   <!-- инструкция для сохранения script в шаблоне (если не она то он проигнорируется и останется только хреновина для moment.js) -->
+  File "d:\myblog\myenv\lib\site-packages\jinja2\utils.py", line 92, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: there is no parent block called 'scripts'.
+2025-05-27 00:56:35,160 ERROR: Exception on /favicon.ico [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+Traceback (most recent call last):
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1788, in dispatch_request
+    self.raise_routing_exception(req)
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1770, in raise_routing_exception
+    raise request.routing_exception  # type: ignore
+  File "d:\myblog\myenv\lib\site-packages\flask\ctx.py", line 351, in match_request
+    result = self.url_adapter.match(return_rule=True)  # type: ignore
+  File "d:\myblog\myenv\lib\site-packages\werkzeug\routing\map.py", line 624, in match
+    raise NotFound() from None
+werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1823, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "D:\myblog\app\routes.py", line 145, in edit_profile
-    return render_template('edit_profile.html', title='Edit Profile', form=form)
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1669, in handle_user_exception
+    return self.handle_http_exception(e)
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1609, in handle_http_exception
+    return self.ensure_sync(handler)(e)
+  File "D:\myblog\app\errors.py", line 9, in not_found_error
+    return render_template('404.html'), 404
   File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 147, in render_template
     return _render(app, template, context)
   File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 130, in _render
@@ -50,14 +101,16 @@ Traceback (most recent call last):
     self.environment.handle_exception()
   File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "D:\myblog\app\templates\edit_profile.html", line 2, in top-level template code
-    {% import "bootstrap_wtf.html" as wtf %}
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 62, in get_source
-    return self._get_source_fast(environment, template)
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 98, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: bootstrap_wtf.html
-2025-05-26 15:01:50,178 ERROR: Exception on /edit_profile [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+  File "D:\myblog\app\templates\404.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "D:\myblog\app\templates\base.html", line 65, in top-level template code
+    {% block scripts %}
+  File "D:\myblog\app\templates\base.html", line 66, in block 'scripts'
+    {{ super() }}   <!-- инструкция для сохранения script в шаблоне (если не она то он проигнорируется и останется только хреновина для moment.js) -->
+  File "d:\myblog\myenv\lib\site-packages\jinja2\utils.py", line 92, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: there is no parent block called 'scripts'.
+2025-05-27 00:56:47,892 ERROR: Exception on /login [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
 Traceback (most recent call last):
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
@@ -67,10 +120,8 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "D:\myblog\app\routes.py", line 145, in edit_profile
-    return render_template('edit_profile.html', title='Edit Profile', form=form)
+  File "D:\myblog\app\routes.py", line 75, in login
+    return render_template('login.html', title='Sign In', form=form)
   File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 147, in render_template
     return _render(app, template, context)
   File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 130, in _render
@@ -79,47 +130,12 @@ Traceback (most recent call last):
     self.environment.handle_exception()
   File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "D:\myblog\app\templates\edit_profile.html", line 2, in top-level template code
-    {% import "bootstrap_wtf.html" as wtf %}
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 62, in get_source
-    return self._get_source_fast(environment, template)
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 98, in _get_source_fast
-    raise TemplateNotFound(template)
-jinja2.exceptions.TemplateNotFound: bootstrap_wtf.html
-2025-05-26 15:02:07,883 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
-2025-05-26 15:04:33,924 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
-2025-05-26 15:10:37,678 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
-2025-05-26 15:10:41,016 ERROR: Exception on /index [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
-Traceback (most recent call last):
-  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
-    response = self.full_dispatch_request()
-  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1825, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1823, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "D:\myblog\app\routes.py", line 34, in index
-    return render_template('index.html', title='Главная', form=form,  posts=posts.items, next_url=next_url, prev_url=prev_url)
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 146, in render_template
-    template = app.jinja_env.get_or_select_template(template_name_or_list)
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1087, in get_or_select_template
-    return self.get_template(template_name_or_list, parent, globals)
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1016, in get_template
-    return self._load_template(name, globals)
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 975, in _load_template
-    template = self.loader.load(self, name, self.make_globals(globals))
-  File "d:\myblog\myenv\lib\site-packages\jinja2\loaders.py", line 138, in load
-    code = environment.compile(source, name, filename)
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 771, in compile
-    self.handle_exception(source=source_hint)
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "D:\myblog\app\templates\index.html", line 25, in template
-    <a class="page-link" href="{{ next_url }}">
-jinja2.exceptions.TemplateSyntaxError: Unexpected end of template. Jinja was looking for the following tags: 'endblock'. The innermost block that needs to be closed is 'block'.
-2025-05-26 15:11:19,660 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
-2025-05-26 15:15:15,901 INFO: Myblog startup [in D:\myblog\app\__init__.py:68]
-2025-05-26 15:21:35,200 INFO: Myblog startup [in D:\myblog\app\__init__.py:68]
+  File "D:\myblog\app\templates\login.html", line 2, in top-level template code
+    {% import 'bootstrap/wtf.html' as wtf %}
+  File "D:\myblog\app\templates\base.html", line 65, in top-level template code
+    {% block scripts %}
+  File "D:\myblog\app\templates\base.html", line 66, in block 'scripts'
+    {{ super() }}   <!-- инструкция для сохранения script в шаблоне (если не она то он проигнорируется и останется только хреновина для moment.js) -->
+  File "d:\myblog\myenv\lib\site-packages\jinja2\utils.py", line 92, in from_obj
+    if hasattr(obj, "jinja_pass_arg"):
+jinja2.exceptions.UndefinedError: there is no parent block called 'scripts'.

@@ -1,4 +1,4 @@
-2025-05-25 23:08:51,092 ERROR: Exception on /reset_password_request [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+2025-05-25 23:34:56,677 ERROR: Exception on /reset_password_request [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
 Traceback (most recent call last):
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
@@ -8,29 +8,37 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "D:\myblog\app\routes.py", line 203, in reset_password_request
-    send_password_reset_email(user)
-  File "D:\myblog\app\email.py", line 22, in send_password_reset_email
-    html_body=render_template('email/reset_password.html', user=user, token=token))
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 147, in render_template
-    return _render(app, template, context)
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 130, in _render
-    rv = template.render(context)
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1295, in render
-    self.environment.handle_exception()
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "D:\myblog\app\templates\email\reset_password.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "D:\myblog\app\templates\base.html", line 34, in top-level template code
-    {% block content %}{% endblock %}
-  File "D:\myblog\app\templates\email\reset_password.html", line 6, in block 'content'
-    {{ form.hidden_tag() }}
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 490, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'form' is undefined
-2025-05-25 23:11:55,176 INFO: Myblog startup [in D:\myblog\app\__init__.py:62]
-2025-05-25 23:12:03,080 ERROR: Exception on /reset_password_request [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+  File "D:\myblog\app\routes.py", line 206, in reset_password_request
+    return render_template('reset_password_request.html', title='����� ������', form=form)
+  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 146, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "d:\myblog\myenv\lib\site-packages\jinja2\loaders.py", line 126, in load
+    source, filename, uptodate = self.get_source(environment, name)
+  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 62, in get_source
+    return self._get_source_fast(environment, template)
+  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 98, in _get_source_fast
+    raise TemplateNotFound(template)
+jinja2.exceptions.TemplateNotFound: reset_password_request.html
+2025-05-25 23:35:41,170 INFO: Myblog startup [in D:\myblog\app\__init__.py:62]
+2025-05-25 23:38:07,171 INFO: Myblog startup [in D:\myblog\app\__init__.py:62]
+2025-05-25 23:53:15,243 INFO: Myblog startup [in D:\myblog\app\__init__.py:62]
+2025-05-26 13:29:50,664 INFO: Myblog startup [in D:\myblog\app\__init__.py:62]
+2025-05-26 14:07:38,258 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
+2025-05-26 14:10:48,942 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
+2025-05-26 14:11:07,492 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
+2025-05-26 14:14:43,382 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
+2025-05-26 14:17:37,111 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
+2025-05-26 14:43:33,724 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
+2025-05-26 14:44:27,120 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
+2025-05-26 14:45:50,936 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
+2025-05-26 14:47:20,927 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
+2025-05-26 14:47:23,630 ERROR: Exception on /register [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
 Traceback (most recent call last):
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
@@ -40,29 +48,26 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "D:\myblog\app\routes.py", line 203, in reset_password_request
-    send_password_reset_email(user)
-  File "D:\myblog\app\email.py", line 22, in send_password_reset_email
-    html_body=render_template('email/reset_password.html', user=user, token=token))
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 147, in render_template
-    return _render(app, template, context)
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 130, in _render
-    rv = template.render(context)
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1295, in render
-    self.environment.handle_exception()
+  File "D:\myblog\app\routes.py", line 99, in register
+    return render_template('register.html', title='Register', form=form)
+  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 146, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "d:\myblog\myenv\lib\site-packages\jinja2\loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
   File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "D:\myblog\app\templates\email\reset_password.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "D:\myblog\app\templates\base.html", line 34, in top-level template code
-    {% block content %}{% endblock %}
-  File "D:\myblog\app\templates\email\reset_password.html", line 6, in block 'content'
-    {{ form.hidden_tag() }}
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 490, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'form' is undefined
-2025-05-25 23:20:02,853 INFO: Myblog startup [in D:\myblog\app\__init__.py:62]
-2025-05-25 23:20:12,599 ERROR: Exception on /reset_password_request [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+  File "D:\myblog\app\templates\register.html", line 15, in template
+    {% block content %}
+jinja2.exceptions.TemplateAssertionError: block 'content' defined twice
+2025-05-26 14:47:24,658 ERROR: Exception on /register [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
 Traceback (most recent call last):
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
@@ -72,29 +77,26 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "D:\myblog\app\routes.py", line 203, in reset_password_request
-    send_password_reset_email(user)
-  File "D:\myblog\app\email.py", line 24, in send_password_reset_email
-    html_body=render_template('email/reset_password.html', user=user, token=token))
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 147, in render_template
-    return _render(app, template, context)
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 130, in _render
-    rv = template.render(context)
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1295, in render
-    self.environment.handle_exception()
+  File "D:\myblog\app\routes.py", line 99, in register
+    return render_template('register.html', title='Register', form=form)
+  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 146, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "d:\myblog\myenv\lib\site-packages\jinja2\loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
   File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "D:\myblog\app\templates\email\reset_password.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "D:\myblog\app\templates\base.html", line 34, in top-level template code
-    {% block content %}{% endblock %}
-  File "D:\myblog\app\templates\email\reset_password.html", line 6, in block 'content'
-    {{ form.hidden_tag() }}
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 490, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'form' is undefined
-2025-05-25 23:21:31,431 INFO: Myblog startup [in D:\myblog\app\__init__.py:62]
-2025-05-25 23:21:39,316 ERROR: Exception on /reset_password_request [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+  File "D:\myblog\app\templates\register.html", line 15, in template
+    {% block content %}
+jinja2.exceptions.TemplateAssertionError: block 'content' defined twice
+2025-05-26 14:47:30,184 ERROR: Exception on /register [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
 Traceback (most recent call last):
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
@@ -104,25 +106,24 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "D:\myblog\app\routes.py", line 203, in reset_password_request
-    send_password_reset_email(user)
-  File "D:\myblog\app\email.py", line 24, in send_password_reset_email
-    html_body=render_template('email/reset_password.html', user=user, token=token))
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 147, in render_template
-    return _render(app, template, context)
-  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 130, in _render
-    rv = template.render(context)
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1295, in render
-    self.environment.handle_exception()
+  File "D:\myblog\app\routes.py", line 99, in register
+    return render_template('register.html', title='Register', form=form)
+  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 146, in render_template
+    template = app.jinja_env.get_or_select_template(template_name_or_list)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1087, in get_or_select_template
+    return self.get_template(template_name_or_list, parent, globals)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1016, in get_template
+    return self._load_template(name, globals)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 975, in _load_template
+    template = self.loader.load(self, name, self.make_globals(globals))
+  File "d:\myblog\myenv\lib\site-packages\jinja2\loaders.py", line 138, in load
+    code = environment.compile(source, name, filename)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 771, in compile
+    self.handle_exception(source=source_hint)
   File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "D:\myblog\app\templates\email\reset_password.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "D:\myblog\app\templates\base.html", line 34, in top-level template code
-    {% block content %}{% endblock %}
-  File "D:\myblog\app\templates\email\reset_password.html", line 6, in block 'content'
-    {{ form.hidden_tag() }}
-  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 490, in getattr
-    return getattr(obj, attribute)
-jinja2.exceptions.UndefinedError: 'form' is undefined
-2025-05-25 23:23:37,948 INFO: Myblog startup [in D:\myblog\app\__init__.py:62]
+  File "D:\myblog\app\templates\register.html", line 15, in template
+    {% block content %}
+jinja2.exceptions.TemplateAssertionError: block 'content' defined twice
+2025-05-26 14:48:49,279 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
+2025-05-26 14:52:47,693 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
