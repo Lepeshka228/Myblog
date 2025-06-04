@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <table class="table table-hover">
+        <tr>
+            <td width="128px"><img src="{{ user.avatar(128) }}"></td>
+            <td>
+                <h1>Пользователь: {{ user.username }}</h1>
+                {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
+                {% if user.last_seen %}<p>Последнее посещение: {{ moment(user.last_seen).format('LLL') }}</p>{% endif %}
+                <p>Подписчики: {{ user.followers_count() }}, Подписки: {{ user.following_count() }}</p>
+                {% if user == current_user %}
+                <p><a href="{{ url_for('edit_profile') }}">Редактировать профиль</a></p>
+                {% elif not current_user.is_following(user) %}
+                <p>
+                    <form action="{{ url_for('follow', username=user.username) }}" method="post">
+                        {{ form.hidden_tag() }}
+                        {{ form.submit(value='Подписаться', class_='btn btn-primary') }}
+                    </form>
+                </p>
+                {% else %}
+                <p>
+                    <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
+                        {{ form.hidden_tag() }}
+                        {{ form.submit(value='Отписаться', class_='btn btn-primary') }}
+                    </form>
+                </p>
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+
+
+
+    <!-- Навигационные вкладки -->
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab(event, 'posts')">Посты</button>
+        <button class="tab-button" onclick="openTab(event, 'followers')">Подписчики</button>
+        <button class="tab-button" onclick="openTab(event, 'following')">Подписки</button>
+    </div>
+
+    <!-- Секция сообщений -->
+    <div id="posts" class="tab-content active">
+        <h3>Посты:</h3>
+        {% for post in posts %}
+            {% include '_post.html' %}
+        {% endfor %}
+
+        <nav aria-label="Post navigation">
+            <ul class="pagination">
+                <li class="page-item{% if not prev_url %} disabled{% endif %}">
+                    <a class="page-link" href="{{ prev_url }}">
+                        <span aria-hidden="true">&larr;</span> Новые
+                    </a>
+                </li>
+                <li class="page-item{% if not next_url %} disabled{% endif %}">
+                    <a class="page-link" href="{{ next_url }}">
+                        Старые <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+
+    <!-- Секция подписчиков -->    
+    <div id="followers" class="tab-content">
+        <h3>Подписчики:</h3>
+        {% for follower in list_followers %}
+            <table class="table table-hover">
+                <tr valign="top">
+                    <td><img src="{{ follower.avatar(36) }}">
+                        <a href="{{ url_for('user', username=follower.username) }}"></a>     <!-- имя пользователя - ссылка на его профиль -->
+                        <a href="{{ url_for('user', username=follower.username) }}">     <!-- имя пользователя - ссылка на его профиль -->
+                            {{ follower.username }}
+                    </td>
+                </tr>
+            </table>
+        {% endfor %}
+
+        <nav aria-label="Post navigation">
+            <ul class="pagination">
+                <li class="page-item{% if not prev_url %} disabled{% endif %}">
+                    <a class="page-link" href="{{ prev_url }}">
+                        <span aria-hidden="true">&larr;</span> Новые
+                    </a>
+                </li>
+                <li class="page-item{% if not next_url %} disabled{% endif %}">
+                    <a class="page-link" href="{{ next_url }}">
+                        Старые <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Секция подписок -->
+    <div id="following" class="tab-content">
+        <h3>Подписки:</h3>
+        {% for follower in list_following %}
+            <table class="table table-hover">
+                <tr valign="top">
+                    <td><img src="{{ follower.avatar(36) }}">
+                        <a href="{{ url_for('user', username=follower.username) }}"></a>     <!-- имя пользователя - ссылка на его профиль -->
+                        <a href="{{ url_for('user', username=follower.username) }}">     <!-- имя пользователя - ссылка на его профиль -->
+                            {{ follower.username }}
+                    </td>
+                </tr>
+            </table>
+        {% endfor %}
+
+        <nav aria-label="Post navigation">
+            <ul class="pagination">
+                <li class="page-item{% if not prev_url %} disabled{% endif %}">
+                    <a class="page-link" href="{{ prev_url }}">
+                        <span aria-hidden="true">&larr;</span> Новые
+                    </a>
+                </li>
+                <li class="page-item{% if not next_url %} disabled{% endif %}">
+                    <a class="page-link" href="{{ next_url }}">
+                        Старые <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <style>
+        .tabs {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab-button {
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+        .tab-button:hover {
+            background-color: #f5f5f5;
+        }
+        .tab-button.active {
+            font-weight: bold;
+            border-bottom: 2px solid #007bff;
+            color: #007bff;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+    function openTab(evt, tabName) {
+        // Скрыть все вкладки
+        var tabContents = document.getElementsByClassName("tab-content");
+        for (var i = 0; i < tabContents.length; i++) {
+            tabContents[i].classList.remove("active");
+        }
+        
+        // Убрать активный класс у всех кнопок
+        var tabButtons = document.getElementsByClassName("tab-button");
+        for (var i = 0; i < tabButtons.length; i++) {
+            tabButtons[i].classList.remove("active");
+        }
+        
+        // Показать текущую вкладку и сделать кнопку активной
+        document.getElementById(tabName).classList.add("active");
+        evt.currentTarget.classList.add("active");
+        
+        // Обновить URL без перезагрузки страницы
+        history.pushState(null, null, `?tab=${tabName}`);
+    }
+    
+    // При загрузке страницы проверяем параметр tab в URL
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const tabParam = urlParams.get('tab');
+        
+        if (tabParam && ['posts', 'followers', 'following'].includes(tabParam)) {
+            // Находим кнопку соответствующей вкладки и кликаем её
+            const tabButtons = document.getElementsByClassName("tab-button");
+            for (var i = 0; i < tabButtons.length; i++) {
+                if (tabButtons[i].textContent.toLowerCase() === tabParam) {
+                    tabButtons[i].click();
+                    break;
+                }
+            }
+        }
+    });
+</script>
+{% endblock %}

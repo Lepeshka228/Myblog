@@ -1,0 +1,38 @@
+
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }} - Мой блог</title>
+      {% else %}
+      <title>Мой блог</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>
+          "Мой блог":
+          <a href="{{ url_for('index') }}">Моя лента</a>     <!-- ссылка на функцию просмотра (вернее на декоратор) в routes.py -->
+          <a href="{{ url_for('explore') }}">Глобальная</a>
+          {% if current_user.is_anonymous %}
+          <a href="{{ url_for('login') }}">Вход</a>
+          {% else %}    <!-- случай вошедшего пользователя -->
+          <a href="{{ url_for('user', username=current_user.username) }}">Профиль</a>   <!-- происходит ссылка на функцию просмотра user(), которая в свою очередь ссылается на декоратор (для отображения страницы) в котором стоит динамическая переменная username, здесь её указываем для правильной ссылки -->
+          <a href="{{ url_for('logout') }}">Выход</a>
+          {% endif %}
+        </div>
+        <hr>
+
+        <!-- вывод скрытых сообщений системы -->
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </body>
+</html>
+

@@ -1,0 +1,29 @@
+{% block content %}
+    <h1>Вход</h1>
+    <form action="" method="post" novalidate>   <!-- form - форма (также исп как html контейнер) переданная как аргумент в функции просмотра (routes.py\login) -->
+        {{ form.hidden_tag() }}     <!-- скрытое поле для защиты с помощью конфигурации (SECRET_KEY) -->
+        <p>
+            {{ form.username.label }}<br>   <!-- метка поля (поле - переменная соответствующего класса(он же форма) в forms.py) -->
+            {{ form.username(size=32) }}        <!-- само поле -->
+            {% for error in form.username.errors %}     <!-- выводит ошибки определённые валидатором в форме, если они возникают -->
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.password.label }}<br>
+            {{ form.password(size=32) }}
+            {% for error in form.password.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+        <p>{{ form.submit() }}</p>
+    </form>
+    <p>
+        Забыли пароль?
+        <a href="{{ url_for('reset_password_request') }}">Сброс пароля</a>
+    </p>        <!-- ссылка на сброс пароля -->
+    <p>
+        Ещё не зарегистрированы? <a href="{{ url_for('register') }}"> Регистрация!</a>
+    </p>     <!-- ссылка на регистрацию -->
+{% endblock %}

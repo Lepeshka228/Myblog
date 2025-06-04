@@ -1,0 +1,160 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <!-- аватарка -->
+    <table>
+        <tr valign="top">
+            <td><img src="{{ user.avatar(128) }}"></td>
+            <td><h1>Пользователь: {{ user.username }}</h1></td>      <!-- динамич переменная user из функции просмотра -->
+        </tr>
+    </table>
+
+    {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}     <!-- поле обо мне в условном операторе Jinja2, если оно пустое - его не видно -->
+    {% if user.last_seen %}<p>Последнее посещение: {{ user.last_seen }}</p>{% endif %}     <!-- поле последнего посещения -->
+
+    <p>Подписчики {{ user.followers.count() }}, Подписки {{ user.followed.count() }}</p>
+
+    {% if user == current_user %}       <!-- ссылка редактирования доступна только для пользователя, который просматривает свой собственный профиль, не чужой и наоборот -->
+        <p><a href="{{ url_for('edit_profile') }}">Редактировать профиль</a></p>
+    {% elif not current_user.is_following(user) %}      <!-- ссылка подписки доступна только пользователю, просматривающему не свой профиль -->
+        <p><a href="{{ url_for('follow', username=user.username) }}">Подписаться</a></p>
+    {% else %}
+        <p><a href="{{ url_for('unfollow', username=user.username) }}">Отписаться</a></p>
+    {% endif %}
+
+    <hr>
+
+    <!-- Навигационные вкладки -->
+    <div class="tabs">
+        <button class="tab-button active" onclick="openTab(event, 'posts')">Посты</button>
+        <button class="tab-button" onclick="openTab(event, 'followers')">Подписчики</button>
+        <button class="tab-button" onclick="openTab(event, 'following')">Подписки</button>
+    </div>
+
+    <!-- Секция сообщений -->
+    <div id="posts" class="tab-content active">
+        <h3>Посты:</h3>
+        {% for post in posts %}
+            {% include '_post.html' %}
+        {% endfor %}
+
+        <!-- ссылка на предыдущую -->
+        {% if prev_url %}
+            <a href="{{ prev_url }}">Новые</a>
+        {% endif %}
+        <!-- ссылка на следующую -->
+        {% if next_url %}
+            <a href="{{ next_url }}">Старые</a>
+        {% endif %}
+    </div>
+
+
+    <!-- Секция подписчиков -->
+    <div id="followers" class="tab-content">
+        <h3>Подписчики:</h3>
+        {% for follower in list_followers %}
+            <table>
+                <tr valign="top">
+                    <td><img src="{{ follower.avatar(36) }}"></td>
+                    <td>
+                        <a href="{{ url_for('user', username=follower.username) }}">     <!-- имя пользователя - ссылка на его профиль -->
+                            {{ follower.username }}
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        {% endfor %}
+    </div>
+
+    <!-- Секция подписок -->
+    <div id="following" class="tab-content">
+        <h3>Подписки:</h3>
+        {% for follower in list_following %}
+            <table>
+                <tr valign="top">
+                    <td><img src="{{ follower.avatar(36) }}"></td>
+                    <td>
+                        <a href="{{ url_for('user', username=follower.username) }}">     <!-- имя пользователя - ссылка на его профиль -->
+                            {{ follower.username }}
+                        </a>
+                    </td>
+                </tr>
+            </table>
+        {% endfor %}
+    </div>
+
+
+        <script>
+            function openTab(evt, tabName) {
+                // Скрыть все вкладки
+                var tabContents = document.getElementsByClassName("tab-content");
+                for (var i = 0; i < tabContents.length; i++) {
+                    tabContents[i].classList.remove("active");
+                }
+                
+                // Убрать активный класс у всех кнопок
+                var tabButtons = document.getElementsByClassName("tab-button");
+                for (var i = 0; i < tabButtons.length; i++) {
+                    tabButtons[i].classList.remove("active");
+                }
+                
+                // Показать текущую вкладку и сделать кнопку активной
+                document.getElementById(tabName).classList.add("active");
+                evt.currentTarget.classList.add("active");
+                
+                // Обновить URL без перезагрузки страницы
+                history.pushState(null, null, `?tab=${tabName}`);
+            }
+            
+            // При загрузке страницы проверяем параметр tab в URL
+            document.addEventListener('DOMContentLoaded', function() {
+                const urlParams = new URLSearchParams(window.location.search);
+                const tabParam = urlParams.get('tab');
+                
+                if (tabParam && ['posts', 'followers', 'following'].includes(tabParam)) {
+                    // Находим кнопку соответствующей вкладки и кликаем её
+                    const tabButtons = document.getElementsByClassName("tab-button");
+                    for (var i = 0; i < tabButtons.length; i++) {
+                        if (tabButtons[i].textContent.toLowerCase() === tabParam) {
+                            tabButtons[i].click();
+                            break;
+                        }
+                    }
+                }
+            });
+        </script>
+
+    <style>
+        .tabs {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+        .tab-button {
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 10px 15px;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+        .tab-button:hover {
+            background-color: #f5f5f5;
+        }
+        .tab-button.active {
+            font-weight: bold;
+            border-bottom: 2px solid #007bff;
+            color: #007bff;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+
+
+
+{% endblock %}
