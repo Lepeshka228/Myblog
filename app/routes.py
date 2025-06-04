@@ -158,7 +158,7 @@ def before_request():
 
     
 # ф-ия подписки
-@app.route('/follow/<username>')
+@app.route('/follow/<username>', methods=['GET', 'POST'])
 @login_required
 def follow(username):
     user = User.query.filter_by(username=username).first()
@@ -176,7 +176,7 @@ def follow(username):
 
 
 # ф-ия отписки
-@app.route('/unfollow/<username>')
+@app.route('/unfollow/<username>', methods=['GET', 'POST'])
 @login_required
 def unfollow(username):
     user = User.query.filter_by(username=username).first()
