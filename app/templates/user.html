@@ -21,7 +21,7 @@
                 </p>
                 {% else %}
                 <p>
-                    <form action="{{ url_for('unfollow', username=user.username) }}" method="post">
+                    <form action="{{ url_for('unfollow', username=user.username) }}" method="POST">
                         {{ form.hidden_tag() }}
                         {{ form.submit(value='Отписаться', class_='btn btn-primary') }}
                     </form>
