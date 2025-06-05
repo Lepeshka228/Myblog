@@ -32,7 +32,7 @@ app = Flask(__name__)   #экземпляр приложения
 app.config.from_object(Config)  #метод для чтения и применения конфигурации 
 
 db = SQLAlchemy(app)        # БД 
-migrate = Migrate(app, db, directory=os.path.join(app.instance_path, 'migrations'))      # механизм миграции
+migrate = Migrate(app, db)      # механизм миграции
 
 login = LoginManager(app)
 login.login_view = 'login'  #функция просмотра login (расширению Flask-Login надо указывать специально, иначе он не понимает)
