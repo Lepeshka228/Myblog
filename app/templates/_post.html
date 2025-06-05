@@ -13,7 +13,9 @@
                     {{ post.author.username }}
                 </a>
             {% endset %}
-            пишет {{ moment(post.timestamp).fromNow() }}:<br>{{ post.body }}
+            {{ user_link|safe }} написал(а) {{ moment(post.timestamp).fromNow() }}
+            <br>
+            <span id="post{{ post.id }}">{{ post.body }}</span>
         </td>
     </tr>
 </table>

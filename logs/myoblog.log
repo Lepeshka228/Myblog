@@ -106,3 +106,39 @@ Traceback (most recent call last):
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'edit_profile'. Did you mean 'main.edit_profile' instead?
 2025-06-05 21:53:52,381 INFO: Myblog startup [in D:\myblog\app\__init__.py:74]
+2025-06-05 22:15:12,925 INFO: Myblog startup [in D:\myblog\app\__init__.py:74]
+2025-06-05 22:15:38,832 INFO: Myblog startup [in D:\myblog\app\__init__.py:74]
+2025-06-05 22:15:40,671 ERROR: Exception on /index [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+Traceback (most recent call last):
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "D:\myblog\app\main\routes.py", line 35, in index
+    return render_template('index.html', title='Главная', form=form,  posts=posts.items, next_url=next_url, prev_url=prev_url)
+  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 147, in render_template
+    return _render(app, template, context)
+  File "d:\myblog\myenv\lib\site-packages\flask\templating.py", line 130, in _render
+    rv = template.render(context)
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 1295, in render
+    self.environment.handle_exception()
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "D:\myblog\app\templates\index.html", line 2, in top-level template code
+    {% import 'bootstrap/wtf.html' as wtf %}
+  File "D:\myblog\app\templates\base.html", line 58, in top-level template code
+    {% block content %}{% endblock %}
+  File "D:\myblog\app\templates\index.html", line 13, in block 'content'
+    {% include '_post.html' %}
+  File "d:\myblog\myenv\lib\site-packages\jinja2\environment.py", line 942, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "D:\myblog\app\templates\_post.html", line 17, in template
+    username=user_link, when=moment(post.timestamp).fromNow()) }}
+jinja2.exceptions.TemplateSyntaxError: expected token 'end of print statement', got '='
+2025-06-05 22:20:28,839 INFO: Myblog startup [in D:\myblog\app\__init__.py:74]
