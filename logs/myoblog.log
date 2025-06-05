@@ -117,3 +117,4 @@ Traceback (most recent call last):
     return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
 sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) unable to open database file
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
+2025-06-05 03:19:40,847 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
