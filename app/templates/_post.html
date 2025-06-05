@@ -4,13 +4,15 @@
 <table class="table table-hover">
     <tr valign="top">
         <td width="70px">
-            <a href="{{ url_for('user', username=post.author.username) }}"></a>
+            <a href="{{ url_for('main.user', username=post.author.username) }}"></a>
             <img src="{{ post.author.avatar(36) }}">
         </td>
         <td>
-            <a href="{{ url_for('user', username=post.author.username) }}">     <!-- имя пользователя - ссылка на его профиль -->
-                {{ post.author.username }}
-            </a>
+            {% set user_link %}
+                <a href="{{ url_for('main.user', username=post.author.username) }}">     <!-- имя пользователя - ссылка на его профиль -->
+                    {{ post.author.username }}
+                </a>
+            {% endset %}
             пишет {{ moment(post.timestamp).fromNow() }}:<br>{{ post.body }}
         </td>
     </tr>

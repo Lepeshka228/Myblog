@@ -5,5 +5,5 @@
     <h1>Редактировать профиль</h1>
     {{ wtf.quick_form(form) }}
 
-    <a href="{{ url_for('user', username=current_user.username) }}" class="btn btn-sm btn-outline-secondary">Назад</a>
+    <a href="{{ url_for('main.user', username=current_user.username) }}" class="btn btn-sm btn-outline-secondary">Назад</a>
 {% endblock %}

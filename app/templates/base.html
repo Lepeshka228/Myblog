@@ -17,30 +17,30 @@
   <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container">
-        <a class="navbar-brand" href="{{ url_for('index') }}">Myblog</a>
+        <a class="navbar-brand" href="{{ url_for('main.index') }}">Myblog</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">Домашняя</a>
+              <a class="nav-link" aria-current="page" href="{{ url_for('main.index') }}">Домашняя</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{{ url_for('explore') }}">Лента</a>
+              <a class="nav-link" aria-current="page" href="{{ url_for('main.explore') }}">Лента</a>
             </li>
           </ul>
           <ul class="navbar-nav mb-2 mb-lg-0">
             {% if current_user.is_anonymous %}
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{{ url_for('login') }}">Вход</a>
+              <a class="nav-link" aria-current="page" href="{{ url_for('auth.login') }}">Вход</a>
             </li>
             {% else %}
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{{ url_for('user', username=current_user.username) }}">Профиль</a>
+              <a class="nav-link" aria-current="page" href="{{ url_for('main.user', username=current_user.username) }}">Профиль</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="{{ url_for('logout') }}">Выход</a>
+              <a class="nav-link" aria-current="page" href="{{ url_for('auth.logout') }}">Выход</a>
             </li>
             {% endif %}
           </ul>

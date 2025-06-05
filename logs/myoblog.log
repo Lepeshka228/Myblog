@@ -1,125 +1,108 @@
-2025-06-05 02:43:58,331 ERROR: Exception on /user/Владимир [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
-Traceback (most recent call last):
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
-    self._dbapi_connection = engine.raw_connection()
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
-    return self.pool.connect()
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 449, in connect
-    return _ConnectionFairy._checkout(self)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
-    fairy = _ConnectionRecord.checkout(pool)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
-    rec = pool._do_get()
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\impl.py", line 180, in _do_get
-    self._dec_overflow()
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
-    raise exc_value.with_traceback(exc_tb)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
-    return self._create_connection()
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
-    return _ConnectionRecord(self)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
-    self.__connect()
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 902, in __connect
-    pool.logger.debug("Error on connect(): %s", e)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
-    raise exc_value.with_traceback(exc_tb)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
-    self.dbapi_connection = connection = pool._invoke_creator(self)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\create.py", line 646, in connect
-    return dialect.connect(*cargs, **cparams)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\default.py", line 625, in connect
-    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
-sqlite3.OperationalError: unable to open database file
-
-The above exception was the direct cause of the following exception:
-
+2025-06-05 21:43:54,069 ERROR: Exception on / [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
 Traceback (most recent call last):
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1825, in full_dispatch_request
     rv = self.handle_user_exception(e)
-  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1821, in full_dispatch_request
-    rv = self.preprocess_request()
-  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2313, in preprocess_request
-    rv = self.ensure_sync(before_func)()
-  File "D:\myblog\app\routes.py", line 154, in before_request
-    if current_user.is_authenticated:
-  File "d:\myblog\myenv\lib\site-packages\werkzeug\local.py", line 316, in __get__
-    obj = instance._get_current_object()
-  File "d:\myblog\myenv\lib\site-packages\werkzeug\local.py", line 520, in _get_current_object
-    return get_name(local())  # type: ignore
-  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 25, in <lambda>
-    current_user = LocalProxy(lambda: _get_user())
-  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 370, in _get_user
-    current_app.login_manager._load_user()
-  File "d:\myblog\myenv\lib\site-packages\flask_login\login_manager.py", line 364, in _load_user
-    user = self._user_callback(user_id)
-  File "D:\myblog\app\models.py", line 124, in load_user
-    return User.query.get(int(id))      # функция загрузчика пользователя
-  File "<string>", line 2, in get
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\util\deprecations.py", line 386, in warned
-    return fn(*args, **kwargs)  # type: ignore[no-any-return]
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\query.py", line 1126, in get
-    return self._get_impl(ident, loading.load_on_pk_identity)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\query.py", line 1143, in _get_impl
-    execution_options=self._execution_options,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 3880, in _get_impl
-    bind_arguments=bind_arguments,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\loading.py", line 698, in load_on_pk_identity
-    bind_arguments=bind_arguments,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 2371, in execute
-    _add_event=_add_event,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 2241, in _execute_internal
-    conn = self._connection_for_bind(bind)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 2110, in _connection_for_bind
-    return trans._connection_for_bind(engine, execution_options)
-  File "<string>", line 2, in _connection_for_bind
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
-    ret_value = fn(self, *arg, **kw)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 1189, in _connection_for_bind
-    conn = bind.connect()
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 3273, in connect
-    return self._connection_cls(self)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 148, in __init__
-    err, dialect, engine
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 2436, in _handle_dbapi_exception_noconnection
-    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
-    self._dbapi_connection = engine.raw_connection()
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
-    return self.pool.connect()
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 449, in connect
-    return _ConnectionFairy._checkout(self)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
-    fairy = _ConnectionRecord.checkout(pool)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
-    rec = pool._do_get()
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\impl.py", line 180, in _do_get
-    self._dec_overflow()
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
-    raise exc_value.with_traceback(exc_tb)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
-    return self._create_connection()
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
-    return _ConnectionRecord(self)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
-    self.__connect()
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 902, in __connect
-    pool.logger.debug("Error on connect(): %s", e)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
-    raise exc_value.with_traceback(exc_tb)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
-    self.dbapi_connection = connection = pool._invoke_creator(self)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\create.py", line 646, in connect
-    return dialect.connect(*cargs, **cparams)
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\default.py", line 625, in connect
-    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) unable to open database file
-(Background on this error at: https://sqlalche.me/e/20/e3q8)
-2025-06-05 03:19:40,847 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
-2025-06-05 03:51:32,989 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
-2025-06-05 03:52:13,883 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
-2025-06-05 03:52:25,451 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
-2025-06-05 04:28:00,926 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
-2025-06-05 04:28:16,941 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 285, in decorated_view
+    return current_app.login_manager.unauthorized()
+  File "d:\myblog\myenv\lib\site-packages\flask_login\login_manager.py", line 196, in unauthorized
+    redirect_url = make_login_url(login_view, next_url=request.url)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 120, in login_url
+    base = expand_login_view(login_view)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 97, in expand_login_view
+    return url_for(login_view)
+  File "d:\myblog\myenv\lib\site-packages\flask\helpers.py", line 262, in url_for
+    **values,
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2034, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2028, in url_for
+    force_external=_external,
+  File "d:\myblog\myenv\lib\site-packages\werkzeug\routing\map.py", line 917, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'login'. Did you mean 'auth.login' instead?
+2025-06-05 21:44:31,804 INFO: Myblog startup [in D:\myblog\app\__init__.py:74]
+2025-06-05 21:44:33,186 ERROR: Exception on / [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+Traceback (most recent call last):
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 285, in decorated_view
+    return current_app.login_manager.unauthorized()
+  File "d:\myblog\myenv\lib\site-packages\flask_login\login_manager.py", line 196, in unauthorized
+    redirect_url = make_login_url(login_view, next_url=request.url)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 120, in login_url
+    base = expand_login_view(login_view)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 97, in expand_login_view
+    return url_for(login_view)
+  File "d:\myblog\myenv\lib\site-packages\flask\helpers.py", line 262, in url_for
+    **values,
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2034, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2028, in url_for
+    force_external=_external,
+  File "d:\myblog\myenv\lib\site-packages\werkzeug\routing\map.py", line 917, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'login'. Did you mean 'auth.login' instead?
+2025-06-05 21:47:18,239 INFO: Myblog startup [in D:\myblog\app\__init__.py:74]
+2025-06-05 21:47:20,307 ERROR: Exception on / [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+Traceback (most recent call last):
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 285, in decorated_view
+    return current_app.login_manager.unauthorized()
+  File "d:\myblog\myenv\lib\site-packages\flask_login\login_manager.py", line 196, in unauthorized
+    redirect_url = make_login_url(login_view, next_url=request.url)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 120, in login_url
+    base = expand_login_view(login_view)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 97, in expand_login_view
+    return url_for(login_view)
+  File "d:\myblog\myenv\lib\site-packages\flask\helpers.py", line 262, in url_for
+    **values,
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2034, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2028, in url_for
+    force_external=_external,
+  File "d:\myblog\myenv\lib\site-packages\werkzeug\routing\map.py", line 917, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'login'. Did you mean 'auth.login' instead?
+2025-06-05 21:50:16,988 INFO: Myblog startup [in D:\myblog\app\__init__.py:74]
+2025-06-05 21:51:37,334 ERROR: Exception on /edit_profile [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+Traceback (most recent call last):
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
+    response = self.full_dispatch_request()
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "D:\myblog\app\main\routes.py", line 93, in edit_profile
+    return redirect(url_for('edit_profile'))
+  File "d:\myblog\myenv\lib\site-packages\flask\helpers.py", line 262, in url_for
+    **values,
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2034, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2028, in url_for
+    force_external=_external,
+  File "d:\myblog\myenv\lib\site-packages\werkzeug\routing\map.py", line 917, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'edit_profile'. Did you mean 'main.edit_profile' instead?
+2025-06-05 21:53:52,381 INFO: Myblog startup [in D:\myblog\app\__init__.py:74]

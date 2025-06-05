@@ -1,10 +1,36 @@
-2025-06-05 01:34:32,732 ERROR: Exception on /login [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+2025-06-05 16:52:59,961 ERROR: Exception on /login [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
 Traceback (most recent call last):
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
-    cursor, str_statement, effective_parameters, context
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\default.py", line 943, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such table: user
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
+    return self.pool.connect()
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
+    rec = pool._do_get()
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\impl.py", line 180, in _do_get
+    self._dec_overflow()
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
+    self.__connect()
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 902, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+sqlite3.OperationalError: unable to open database file
 
 The above exception was the direct cause of the following exception:
 
@@ -25,45 +51,58 @@ Traceback (most recent call last):
     execution_options={"_sa_orm_load_options": self.load_options},
   File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 2371, in execute
     _add_event=_add_event,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 2257, in _execute_internal
-    conn,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\context.py", line 307, in orm_execute_statement
-    statement, params or {}, execution_options=execution_options
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
-    execution_options or NO_OPTIONS,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\sql\elements.py", line 524, in _execute_on_connection
-    self, distilled_params, execution_options
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1647, in _execute_clauseelement
-    cache_hit=cache_hit,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
-    dialect, context, statement, parameters
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
-    e, str_statement, effective_parameters, cursor, context
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 2351, in _handle_dbapi_exception
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 2241, in _execute_internal
+    conn = self._connection_for_bind(bind)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 2110, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+  File "<string>", line 2, in _connection_for_bind
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 1189, in _connection_for_bind
+    conn = bind.connect()
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 3273, in connect
+    return self._connection_cls(self)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 148, in __init__
+    err, dialect, engine
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 2436, in _handle_dbapi_exception_noconnection
     raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
-    cursor, str_statement, effective_parameters, context
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\default.py", line 943, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: user
-[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.about_me AS user_about_me, user.last_seen AS user_last_seen 
-FROM user 
-WHERE user.username = ?
- LIMIT ? OFFSET ?]
-[parameters: ('Вовчик', 1, 0)]
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 145, in __init__
+    self._dbapi_connection = engine.raw_connection()
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 3297, in raw_connection
+    return self.pool.connect()
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 1264, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 713, in checkout
+    rec = pool._do_get()
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\impl.py", line 180, in _do_get
+    self._dec_overflow()
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\impl.py", line 177, in _do_get
+    return self._create_connection()
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 675, in __init__
+    self.__connect()
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 902, in __connect
+    pool.logger.debug("Error on connect(): %s", e)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 224, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\pool\base.py", line 897, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\create.py", line 646, in connect
+    return dialect.connect(*cargs, **cparams)
+  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\default.py", line 625, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)  # type: ignore[no-any-return]  # NOQA: E501
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) unable to open database file
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
-2025-06-05 01:38:36,660 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
-2025-06-05 01:58:43,066 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
-2025-06-05 01:59:02,835 ERROR: Exception on /login [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
-Traceback (most recent call last):
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
-    cursor, str_statement, effective_parameters, context
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\default.py", line 943, in do_execute
-    cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such table: user
-
-The above exception was the direct cause of the following exception:
-
+2025-06-05 16:59:25,222 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
+2025-06-05 16:59:45,458 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
+2025-06-05 18:57:38,414 INFO: Myblog startup [in D:\myblog\app\__init__.py:65]
+2025-06-05 19:07:38,522 INFO: Myblog startup [in D:\myblog\app\__init__.py:74]
+2025-06-05 19:07:42,408 ERROR: Exception on / [GET] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
 Traceback (most recent call last):
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2529, in wsgi_app
     response = self.full_dispatch_request()
@@ -73,38 +112,21 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
-  File "D:\myblog\app\routes.py", line 64, in login
-    user = User.query.filter_by(username=form.username.data).first()    # загрузка пользователя из БД. username приходит из формы и сравнивается с username из БД
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\query.py", line 2759, in first
-    return self.limit(1)._iter().first()  # type: ignore
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\query.py", line 2860, in _iter
-    execution_options={"_sa_orm_load_options": self.load_options},
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 2371, in execute
-    _add_event=_add_event,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\session.py", line 2257, in _execute_internal
-    conn,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\orm\context.py", line 307, in orm_execute_statement
-    statement, params or {}, execution_options=execution_options
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
-    execution_options or NO_OPTIONS,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\sql\elements.py", line 524, in _execute_on_connection
-    self, distilled_params, execution_options
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1647, in _execute_clauseelement
-    cache_hit=cache_hit,
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1843, in _execute_context
-    dialect, context, statement, parameters
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1983, in _exec_single_context
-    e, str_statement, effective_parameters, cursor, context
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 2351, in _handle_dbapi_exception
-    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
-    cursor, str_statement, effective_parameters, context
-  File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\default.py", line 943, in do_execute
-    cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: user
-[SQL: SELECT user.id AS user_id, user.username AS user_username, user.email AS user_email, user.password_hash AS user_password_hash, user.about_me AS user_about_me, user.last_seen AS user_last_seen 
-FROM user 
-WHERE user.username = ?
- LIMIT ? OFFSET ?]
-[parameters: ('Вовчик', 1, 0)]
-(Background on this error at: https://sqlalche.me/e/20/e3q8)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 285, in decorated_view
+    return current_app.login_manager.unauthorized()
+  File "d:\myblog\myenv\lib\site-packages\flask_login\login_manager.py", line 196, in unauthorized
+    redirect_url = make_login_url(login_view, next_url=request.url)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 120, in login_url
+    base = expand_login_view(login_view)
+  File "d:\myblog\myenv\lib\site-packages\flask_login\utils.py", line 97, in expand_login_view
+    return url_for(login_view)
+  File "d:\myblog\myenv\lib\site-packages\flask\helpers.py", line 262, in url_for
+    **values,
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2034, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "d:\myblog\myenv\lib\site-packages\flask\app.py", line 2028, in url_for
+    force_external=_external,
+  File "d:\myblog\myenv\lib\site-packages\werkzeug\routing\map.py", line 917, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'login'. Did you mean 'auth.login' instead?
+2025-06-05 19:22:05,189 INFO: Myblog startup [in D:\myblog\app\__init__.py:74]
