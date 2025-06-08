@@ -1,4 +1,4 @@
-2025-06-05 01:32:45,742 ERROR: Exception on /login [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+2025-06-05 01:34:32,732 ERROR: Exception on /login [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
 Traceback (most recent call last):
   File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
     cursor, str_statement, effective_parameters, context
@@ -50,9 +50,11 @@ sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: user
 FROM user 
 WHERE user.username = ?
  LIMIT ? OFFSET ?]
-[parameters: ('Александр', 1, 0)]
+[parameters: ('Вовчик', 1, 0)]
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
-2025-06-05 01:33:08,584 ERROR: Exception on /login [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
+2025-06-05 01:38:36,660 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
+2025-06-05 01:58:43,066 INFO: Myblog startup [in D:\myblog\app\__init__.py:76]
+2025-06-05 01:59:02,835 ERROR: Exception on /login [POST] [in d:\myblog\myenv\lib\site-packages\flask\app.py:1745]
 Traceback (most recent call last):
   File "d:\myblog\myenv\lib\site-packages\sqlalchemy\engine\base.py", line 1964, in _exec_single_context
     cursor, str_statement, effective_parameters, context
@@ -104,5 +106,5 @@ sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: user
 FROM user 
 WHERE user.username = ?
  LIMIT ? OFFSET ?]
-[parameters: ('Санек', 1, 0)]
+[parameters: ('Вовчик', 1, 0)]
 (Background on this error at: https://sqlalche.me/e/20/e3q8)

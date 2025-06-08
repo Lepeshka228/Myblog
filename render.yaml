@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: Myblog
-    env: python
-    buildCommand: "pip install -r requirements.txt && flask db upgrade"
-    startCommand: "gunicorn myblog:app"
-    envVars:
-      - key: DATABASE_URL
-        value: file:///var/lib/render/app.db  # Путь для постоянного хранения
